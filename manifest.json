@@ -1,0 +1,55 @@
+{
+  "manifest_version": 2,
+  "name": "Save For Later",
+  "version": "1.0.0",
+  "description": "Save web pages for later viewing with collections",
+  
+  "applications": {
+    "gecko": {
+      "id": "{ba720a13-1521-19ae-a8b1-b71d606ad9a0}",
+      "strict_min_version": "57.0"
+    }
+  },
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Save For Later",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "web_accessible_resources": [
+    "icons/*"
+  ]
+} 

@@ -1,0 +1,35 @@
+{
+  "name": "save-for-later-for-firefox",
+  "version": "1.0.0",
+  "description": "A Firefox extension that allows you to save web pages for later viewing with collections and tagging features",
+  "main": "manifest.json",
+  "scripts": {
+    "package": "powershell -Command \"Compress-Archive -Path .\\* -DestinationPath save-for-later.zip -Force\"",
+    "package-xpi": "powershell -Command \"Compress-Archive -Path .\\* -DestinationPath save-for-later.zip -Force && ren save-for-later.zip save-for-later.xpi\"",
+    "clean": "powershell -Command \"if (Test-Path save-for-later.zip) { Remove-Item save-for-later.zip }; if (Test-Path save-for-later.xpi) { Remove-Item save-for-later.xpi }\"",
+    "dev": "echo 'Load manifest.json in about:debugging for development'",
+    "validate": "echo 'Check manifest.json syntax and required files'"
+  },
+  "keywords": [
+    "firefox",
+    "extension",
+    "addon",
+    "bookmark",
+    "save",
+    "web",
+    "pages"
+  ],
+  "author": "Bartamous",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bartamous/Save-For-Later-for-Firefox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bartamous/Save-For-Later-for-Firefox/issues"
+  },
+  "homepage": "https://github.com/Bartamous/Save-For-Later-for-Firefox#readme",
+  "engines": {
+    "firefox": ">=57.0"
+  }
+} 

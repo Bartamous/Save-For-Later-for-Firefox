@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save For Later</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Save For Later</h1>
+      <div class="header-actions">
+        <button id="addCollectionBtn" class="btn btn-secondary">New Collection</button>
+        <button id="refreshBtn" class="btn btn-secondary">Refresh</button>
+      </div>
+    </header>
+
+    <div class="filters">
+      <div class="filter-group">
+        <label for="collectionFilter">Collection:</label>
+        <select id="collectionFilter" class="filter-select">
+          <option value="all">All Collections</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="searchInput">Search:</label>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search saved pages...">
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="saved">Saved Pages</button>
+      <button class="tab-btn" data-tab="collections">Collections</button>
+    </div>
+
+    <div class="tab-content">
+      <div id="savedTab" class="tab-pane active">
+        <div id="savedPagesList" class="pages-grid">
+          <!-- Saved pages-->
+        </div>
+        <div id="noPagesMessage" class="no-pages-message" style="display: none;">
+          <p>No pages saved yet. Right-click on any webpage and select "Save For Later" to get started!</p>
+        </div>
+      </div>
+
+      <div id="collectionsTab" class="tab-pane">
+        <div class="collections-container">
+          <div id="collectionsList">
+            <!-- Collections -->
+          </div>
+        </div>
+        <div id="collectionView" class="collection-view" style="display: none;">
+          <div class="collection-header-bar">
+            <button id="backToCollectionsBtn" class="btn btn-secondary back-btn">
+              <span class="back-arrow">←</span> Back to Collections
+            </button>
+            <h2 id="currentCollectionName" class="current-collection-name"></h2>
+          </div>
+          <div id="collectionPagesList" class="pages-grid">
+            <!-- Collection pages will be populated here -->
+          </div>
+          <div id="noCollectionPagesMessage" class="no-pages-message" style="display: none;">
+            <p>No pages in this collection yet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Saved Page</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="editTitle">Title:</label>
+          <input type="text" id="editTitle" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="editCollection">Collection:</label>
+          <select id="editCollection" class="form-input">
+            <option value="default">Default</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editTags">Tags (comma-separated):</label>
+          <input type="text" id="editTags" class="form-input" placeholder="work, important, todo">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveEditBtn" class="btn btn-primary">Save</button>
+        <button id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adding collection modal -->
+  <div id="collectionModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>New Collection</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="newCollectionName">Collection Name:</label>
+          <input type="text" id="newCollectionName" class="form-input" placeholder="Enter collection name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveCollectionBtn" class="btn btn-primary">Create</button>
+        <button id="cancelCollectionBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html> 
