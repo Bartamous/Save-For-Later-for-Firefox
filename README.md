@@ -18,7 +18,7 @@ This firefox extension allows you to save web pages for later viewing with colle
 ## Installation
 ### Method 1: Get through the Mozilla Add-ons (Recomended) 
 1. Open the Mozilla Add-ons Store
-2. Search for XXXXXX(UPDATE)
+2. Search for [Save For Later For Firefox](https://addons.mozilla.org/en-US/firefox/addon/save-for-later-for-firefox/)
 3. The extension will be installed and you can start using it
 
 

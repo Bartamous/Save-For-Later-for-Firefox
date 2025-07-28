@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save For Later</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <img src="icons/icon48.png" alt="Save For Later" class="header-icon">
+          <h1>Save For Later</h1>
+        </div>
+        <div class="header-actions">
+          <button id="refreshBtn" class="btn btn-secondary">Refresh</button>
+          <button id="settingsBtn" class="btn btn-secondary" title="Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 5 15.4a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 5.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09c0 .66.38 1.26 1 1.51a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 18.4 9c.13.31.2.65.2 1v.09c0 .66.38 1.26 1 1.51a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09c-.66 0-1.26.38-1.51 1z"></path></svg>
+          </button>
+          <button id="themeToggleBtn" class="btn btn-secondary" title="Toggle dark mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <!-- Enhanced Filters Section -->
+      <div class="filters">
+        <div class="filters-row">
+          <div class="filter-group">
+            <label for="searchInput">Search:</label>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search titles, URLs, tags...">
+          </div>
+          <div class="filter-group">
+            <label for="collectionFilter">Collection:</label>
+            <select id="collectionFilter" class="filter-select">
+              <option value="all">All Collections</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="dateFilter">Date:</label>
+            <select id="dateFilter" class="filter-select">
+              <option value="all">All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+              <option value="year">This Year</option>
+            </select>
+          </div>
+        </div>
+        <div class="filters-row">
+          <div class="filter-group">
+            <label for="sortFilter">Sort:</label>
+            <select id="sortFilter" class="filter-select">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="alphabetical">A-Z</option>
+              <option value="domain">By Domain</option>
+            </select>
+          </div>
+        </div>
+        <div class="bulk-actions" id="bulkActions" style="display: none;">
+          <div class="bulk-info">
+            <span id="selectedCount">0</span> pages selected
+          </div>
+          <div class="bulk-buttons">
+            <button id="selectAllBtn" class="btn btn-secondary">Select All</button>
+            <button id="selectNoneBtn" class="btn btn-secondary">Select None</button>
+            <button id="bulkDeleteBtn" class="btn btn-danger">Delete Selected</button>
+            <button id="bulkMoveBtn" class="btn btn-secondary">Move to Collection</button>
+            <button id="bulkTagBtn" class="btn btn-secondary">Add Tags</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs Section -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="saved">Saved Pages</button>
+        <button class="tab-btn" data-tab="collections">Collections</button>
+        <button class="tab-btn" data-tab="settings">Settings</button>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content">
+        <!-- Saved Pages Tab -->
+        <div id="savedTab" class="tab-pane active">
+          <div id="savedPagesList" class="pages-grid">
+            <!-- Saved pages will be populated here -->
+          </div>
+          <div id="noPagesMessage" class="no-pages-message" style="display: none;">
+            <div class="no-pages-content">
+              <img src="icons/icon128.png" alt="Save For Later" class="no-pages-icon">
+              <h3>No pages saved yet</h3>
+              <p>Right-click on any webpage and select "Save For Later" to get started!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collections Tab -->
+        <div id="collectionsTab" class="tab-pane">
+          <div class="collections-container">
+            <div class="collections-header">
+              <button id="addCollectionBtn" class="btn btn-primary">New Collection</button>
+            </div>
+            <div id="collectionsList" class="collections-list">
+              <!-- Collections will be populated here -->
+            </div>
+          </div>
+          <div id="collectionView" class="collection-view" style="display: none;">
+            <div class="collection-header-bar">
+              <button id="backToCollectionsBtn" class="btn btn-secondary back-btn">
+                <span class="back-arrow">←</span> Back to Collections
+              </button>
+              <h2 id="currentCollectionName" class="current-collection-name"></h2>
+            </div>
+            <div id="collectionPagesList" class="pages-grid">
+              <!-- Collection pages will be populated here -->
+            </div>
+            <div id="noCollectionPagesMessage" class="no-pages-message" style="display: none;">
+              <div class="no-pages-content">
+                <h3>No pages in this collection yet</h3>
+                <p>Pages you add to this collection will appear here.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settingsTab" class="tab-pane">
+          <div class="settings-content">
+            <div class="settings-section">
+              <h3>Appearance</h3>
+              <div class="settings-row">
+                <label for="darkModeToggle" class="toggle-label">Dark Mode</label>
+                <label class="switch">
+                  <input type="checkbox" id="darkModeToggle">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3>Data Management</h3>
+              <div class="settings-row">
+                <button id="exportSavesBtn" class="btn btn-primary">Export Saved Pages</button>
+                <button id="importSavesBtn" class="btn btn-secondary">Import Saved Pages</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secret Party Button -->
+          <button id="secretPartyBtn" class="secret-party-btn" title="🎉">
+            🎩
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Saved Page</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="editTitle">Title:</label>
+          <input type="text" id="editTitle" class="form-input">
+        </div>
+        <div class="form-group">
+          <label for="editCollection">Collection:</label>
+          <select id="editCollection" class="form-input">
+            <option value="default">Default</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editTags">Tags (comma-separated):</label>
+          <input type="text" id="editTags" class="form-input" placeholder="work, important, todo">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveEditBtn" class="btn btn-primary">Save</button>
+        <button id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collection Modal -->
+  <div id="collectionModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>New Collection</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="newCollectionName">Collection Name:</label>
+          <input type="text" id="newCollectionName" class="form-input" placeholder="Enter collection name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="saveCollectionBtn" class="btn btn-primary">Create</button>
+        <button id="cancelCollectionBtn" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts Tooltip -->
+  <div id="keyboardShortcuts" class="keyboard-shortcuts">
+    <div>Press <strong>?</strong> to see shortcuts</div>
+  </div>
+
+  <!-- Page Preview Tooltip -->
+  <div id="pagePreview" class="page-preview" style="display: none;">
+    <div class="preview-header">
+      <div class="preview-title"></div>
+      <div class="preview-reading-time"></div>
+    </div>
+    <div class="preview-content">
+      <div class="preview-description"></div>
+      <div class="preview-tags"></div>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div id="confetti-container"></div>
+
+  <script src="main.js"></script>
+</body>
+</html> 

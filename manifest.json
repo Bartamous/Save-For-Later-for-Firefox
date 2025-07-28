@@ -6,8 +6,7 @@
   
   "applications": {
     "gecko": {
-      "id": "{ba720a13-1521-19ae-a8b1-b71d606ad9a0}",
-      "strict_min_version": "57.0"
+      "id": "{ba720a13-1521-19ae-a8b1-b71d606ad9a0}"
     }
   },
   
@@ -16,6 +15,8 @@
     "storage",
     "contextMenus",
     "tabs",
+    "notifications",
+    "downloads",
     "http://*/*",
     "https://*/*"
   ],
@@ -24,15 +25,9 @@
     "scripts": ["background.js"]
   },
 
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
-    }
-  ],
+
 
   "browser_action": {
-    "default_popup": "popup.html",
     "default_title": "Save For Later",
     "default_icon": {
       "16": "icons/icon16.png",
@@ -50,6 +45,12 @@
   },
 
   "web_accessible_resources": [
-    "icons/*"
+    "icons/*",
+    "import.html",
+    "import.js",
+    "main.html",
+    "main.js",
+    "main.css",
+    "party.mp3"
   ]
 } 
