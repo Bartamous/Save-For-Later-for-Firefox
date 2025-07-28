@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Save web pages for later viewing with collections",
   
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "{ba720a13-1521-19ae-a8b1-b71d606ad9a0}"
     }

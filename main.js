@@ -590,13 +590,27 @@ function createPageCardElement(page) {
   const readingTime = document.createElement('div');
   readingTime.className = 'page-reading-time';
   const estimatedTime = estimateReadingTime(page.title, page.description || '');
-  readingTime.innerHTML = `
-    <svg class="reading-time-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12,6 12,12 16,14"/>
-    </svg>
-    ${estimatedTime} min read
-  `;
+  
+  // Create SVG icon safely
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'reading-time-icon');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('fill', 'none');
+  svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2');
+  
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', '12');
+  circle.setAttribute('cy', '12');
+  circle.setAttribute('r', '10');
+  svg.appendChild(circle);
+  
+  const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+  polyline.setAttribute('points', '12,6 12,12 16,14');
+  svg.appendChild(polyline);
+  
+  readingTime.appendChild(svg);
+  readingTime.appendChild(document.createTextNode(` ${estimatedTime} min read`));
   card.appendChild(readingTime);
 
 
